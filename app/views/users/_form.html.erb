@@ -1,5 +1,5 @@
 <% if @user.errors.any? %>
-  <h2>The following errors prevented the article from being saved</h2>
+  <h2>THE FOLLOWING ERRORS PREVENTED USER FROM BEING SIGNED-UP!!!</h2>
   <ul>
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -26,7 +26,8 @@
     <%= f.password_field :password, palceholder: "Enter Your Password:"%>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit "SignUp" %>
   </p>
 <% end %>
 <p><%= link_to "Create New Article", new_article_path %></p>
+<%= link_to "Home Page", root_path %>
