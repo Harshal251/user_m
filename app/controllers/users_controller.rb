@@ -1,10 +1,23 @@
 class UsersController < ApplicationController
+  before_action :get_article, only: [:show, :destroy, :update, :edit]
+
+  def index
+    @user = User.all
+  end
+
+  def show
+  end
+
   def new
     @user = User.new
   end
 
+  def edit
+  end
+
   def create
     @user = User.new(user_params)
+
     if @user.save
       flash[:notice] = "WELCOME #{@user.username} !! YOU HAVE SUCCESSFULLY SIGNED-UP!!"
       redirect_to @user
@@ -12,8 +25,29 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity             #flashh
     end
   end
+
+  def update
+    if @user.update(user_params)
+      flash[:notice] = "User Details were updated successfully!!"
+      redirect_to @user
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to users_path, status: :see_other
+    flash[:notice] = "User Details Were  Deleted successfully!!"
+  end
+
   private
-    def user_params
+
+  def get_article
+    @user = User.find(params[:id])
+  end
+
+  def user_params
     params.require(:user).permit(:username, :email, :password)
   end
 end

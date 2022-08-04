@@ -1,0 +1,7 @@
+<h1>Showing Users</h1>
+<p><strong>Username: </strong><%= @user.username %></p>
+<p><strong>Email: </strong><%= @user.email%></p>
+
+<%= link_to 'Edit',edit_user_path(@user) %>|
+<%= link_to 'Delete',user_path(@user), data: { turbo_method: :delete, turbo_confirm: "All Information Assocciated With This User Will Be Deleted!!!\nDo You Want to Continue? " } %>|  
+<%= link_to 'User_Details',users_path%>

@@ -26,8 +26,8 @@
     <%= f.password_field :password, palceholder: "Enter Your Password:"%>
   </p>
   <p>
-    <%= f.submit "SignUp" %>
+    <%= f.submit(@user.new_record? ? "SignUp" : "Update") %>
   </p>
 <% end %>
 <p><%= link_to "Create New Article", new_article_path %></p>
-<%= link_to "Home Page", root_path %>
+<%= link_to "Home", root_path %>
