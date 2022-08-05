@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = Article.new()
   end
 
   def edit
@@ -17,7 +17,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = User.last
+   
+     @article.user_id = session[:user_id]
     if @article.save
       flash[:notice] = "Article was created Successfully!!"
       redirect_to @article

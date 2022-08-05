@@ -1,10 +1,15 @@
 <h1><%= @user.username %>'s Profile</h1>
 <p><strong>Username: </strong><%= @user.username %></p>
-<p><strong>Email: </strong><%= @user.email%></p>
-
-<%= link_to 'Edit',edit_user_path(@user) %>|
-<%= link_to 'Delete',user_path(@user), data: { turbo_method: :delete, turbo_confirm: "All Information Assocciated With This User Will Be Deleted!!!\nDo You Want to Continue? " } %>|  
-<%= link_to 'User_Details',users_path%>
+<p><strong>Email: </strong><%= @user.email %></p>
+<%= link_to "Edit Profile", edit_user_path(@user) %>|
+<%= link_to "Delete", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "All Information Assocciated With This User Will Be Deleted!!!\nDo You Want to Continue? " } %>|  
+<%= link_to "User_Details", users_path %> <br>
+<p><%= link_to "Create New Article", new_article_path %></p> 
+<% if logged_in? %>
+<%= link_to "Log out", logout_path, method: :delete %>
+<% else %>
+<%= link_to "Log In", login_path %>
+<% end %>
 
 <h3>Articles</h3>
-<%= render 'articles/article'%>
+<%= render "articles/article" %>   <% # to show number of articles linked %>

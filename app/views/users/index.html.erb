@@ -1,26 +1,5 @@
 <h1>USER DETAILS!!</h1>
-<table>
-<thead>
-<tr>
-<th>Username</th>
-<th>Email</th>
-<th colspan="3"> Actions</th>
-</tr>
-</thead>
-
-<tbody>
-  <% @user.each do |user| %>
-  <tr>
-    <td><%= user.username%></td>
-    <td><%= user.email %></td>
-    <td><%= link_to "Show", user_path(user) %></td>
-    <td><%= link_to "Edit", edit_user_path(user) %></td>
-    <td> <%= link_to "Delete", user_path(user), data: { turbo_method: :delete, turbo_confirm: "All Information Assocciated With This User Will Be Deleted!!!
-    \nDo You Want to Continue? " } %></td>
-  </tr>
-  <% end %>
-</tbody>
-</table>
+<%= render "user"%>
 <p><%= link_to "Home", root_path%></p>
 <p><%= link_to "SignUp", signup_path%></p>
 <p><%= link_to "Articles",articles_path%></p>
