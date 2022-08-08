@@ -4,7 +4,9 @@
 <th>Title</th>
 <th>Description</th>
 <th>User_Id</th>
+<% if logged_in? %>
 <th>Assocciated_To:</th>
+<% end %>
 <th colspan="3"> Actions</th>
 
 </tr>
@@ -17,12 +19,17 @@
     <td><%= article.title %></td>
     <td><%= article.discription %></td>
    <td><%= article.user_id %></td>
-   <td><% if article.user%>
-   <%= link_to article.user.username, user_path(article.user)%>
-  <%end%></td>
+   <% if logged_in? %>
+   <td><% if article.user %>
+   <%= link_to article.user.username, user_path(article.user) %>
+
+  <% end %></td>
+  <% end %>
     <td><%= link_to "Show", article_path(article) %></td>
+    <% if logged_in? && (article.user == current_user || current_user.admin?) %>
     <td><%= link_to "Edit", edit_article_path(article) %></td>
     <td> <%= link_to "Delete", article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you Sure?" } %></td>
+  <% end %>
   </tr>
   <% end %>
 </tbody>

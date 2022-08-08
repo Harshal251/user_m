@@ -9,7 +9,11 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
     flash[:notice]= "Login Success!!"
-    redirect_to user
+        if user.admin?
+          redirect_to articles_path
+        else
+          redirect_to user
+        end
     else
       flash.now[:alert] = "There was Some error!!" #using now because we are not redirecting
       render :new, status: :unprocessable_entity 

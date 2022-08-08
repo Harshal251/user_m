@@ -1,9 +1,14 @@
+<%= link_to "Articles", articles_path %>|<%= link_to "About", about_path %>|<%= link_to "User Details", users_path%>|<%= link_to "SignUp", signup_path%>|
+<% if logged_in?%>
+<%= link_to "Logout", logout_path%>
+<%else%>
+<%= link_to "Login",login_path %>
+<%end%>
 <h1>HOME PAGE</h1>
-<p><%= link_to "Articles", articles_path %></p>
-<p><%= link_to "About", about_path %></p>
-<p><%= link_to "SignUp", signup_path%></p>
-<p><%= link_to"Log In", login_path%></p>
-<%= link_to "User Details", users_path%>
+
+
+
+
 
 
 <%# <form action="action_page.php" method="post">

@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-  before_action :get_article, only: [:show, :destroy, :update, :edit]
+  before_action :get_article, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = User.all
   end
 
   def show
-    @articles= @user.articles
+    @articles = @user.articles
   end
 
   def new
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id]=@user.id
+      session[:user_id] = @user.id
       flash[:notice] = "WELCOME #{@user.username} !! YOU HAVE SUCCESSFULLY SIGNED-UP!!"
       redirect_to @user
     else
@@ -39,8 +39,9 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_path, status: :see_other
+    session[:user_id] = nil if @user == current_user
     flash[:notice] = "User Details Were  Deleted successfully!!"
+    redirect_to users_path, status: :see_other
   end
 
   private

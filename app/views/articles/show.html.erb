@@ -2,8 +2,22 @@
 <p><strong>Title: </strong><%= @article.title %></p>
 <p><strong>Discription: </strong><%= @article.discription %></p>
 
-
-<%= link_to 'Edit',edit_article_path(@article) %>|
-<%= link_to 'Delete',article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you Sure?" } %>|  
-<%= link_to 'Articles',articles_path%>
-<p><%= link_to "Create New Article", new_article_path %></p> 
+<% if logged_in? && @article.user == current_user %>
+<%= link_to "Edit", edit_article_path(@article) %>|
+<%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you Sure?" } %>|  
+<% end %>
+<%= link_to "Articles", articles_path %>
+<p><%= link_to "Create New Article", new_article_path %></p>  
+<% if logged_in?%>
+<p><%= link_to "User",user_path(@current_user)%></p>
+<%end%>
+<p>
+  <h1><%= @article.title %></h1>
+</p>
+<p>
+  Posted by:
+  <strong><%= current_user.email%></strong>
+</p>
+<p>
+  On <%= @article.created_at.strftime("%B %d %Y, %l:%M%P") %>
+</p>

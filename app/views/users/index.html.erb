@@ -1,5 +1,11 @@
 <h1>USER DETAILS!!</h1>
-<%= render "user"%>
-<p><%= link_to "Home", root_path%></p>
-<p><%= link_to "SignUp", signup_path%></p>
-<p><%= link_to "Articles",articles_path%></p>
+<%= render "user" %>
+<p><%= link_to "Home", root_path %></p>
+<%# <p><%= link_to "SignUp", signup_path %></p>
+<p><%= link_to "Create New Article", new_article_path %></p>
+<% if logged_in? %>
+<p><%= link_to "Log Out", logout_path %></p>
+<% else %>
+<p><%= link_to "Log In", login_path %></p>
+<% end %>
+<p><%= link_to "Articles", articles_path %></p>

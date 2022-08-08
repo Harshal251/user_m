@@ -1,8 +1,13 @@
-<h1><%= @user.username %>'s Profile</h1>
+<h1><%= @user.username %>'s Profile <%= "(Admin)"if @user.admin?%></h1>
 <p><strong>Username: </strong><%= @user.username %></p>
 <p><strong>Email: </strong><%= @user.email %></p>
+<p>
+ Joined On <%=@user.created_at.strftime("%B %d %Y, %l:%M%P") %>
+</p>
+<% if logged_in? && @user == current_user %>
 <%= link_to "Edit Profile", edit_user_path(@user) %>|
 <%= link_to "Delete", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "All Information Assocciated With This User Will Be Deleted!!!\nDo You Want to Continue? " } %>|  
+<% end %>
 <%= link_to "User_Details", users_path %> <br>
 <p><%= link_to "Create New Article", new_article_path %></p> 
 <% if logged_in? %>
@@ -10,6 +15,10 @@
 <% else %>
 <%= link_to "Log In", login_path %>
 <% end %>
-
+<p><%= link_to "Articles", articles_path %></p>
+<% if @user.articles.length > 0%>
 <h3>Articles</h3>
-<%= render "articles/article" %>   <% # to show number of articles linked %>
+<%= render "articles/article" %>  <%# to show number of articles linked %>
+<%else%>
+<h3>There are No Articles Assocciated with this user!!</h3>
+<%end%>
